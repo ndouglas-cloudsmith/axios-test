@@ -1,2 +1,45 @@
 # axios-test
-Simple commands to create a test/fake axios npm package for policy detection
+Simple commands to create a test/fake axios npm package for policy detection:
+
+```
+mkdir fake-axios-package
+cd fake-axios-package
+```
+
+**[MAL-2026-2307](https://github.com/ossf/malicious-packages/blob/a705fedc001a3b3ab3a75a71f0f1cb18809b943d/osv/malicious/npm/axios/MAL-2026-2307.json#L18-L19)** is tracked on versions ```0.30.4``` and ```1.14.1```
+```
+echo '{ "name": "axios", "version": "0.30.4", "description": "Fake package for testing" }' > package.json
+```
+
+**Pre-publish Testing**: ```npm pack``` allows you to check the contents of your package before it goes live.<br/>
+**Private Sharing**: You can share these ```.tgz``` tarballs with Cloudsmith without going through npm registration.
+```
+npm pack
+```
+
+Once to package is packed, you can push it to Cloudsmith via the **[Cloudsmith CLI](https://help.cloudsmith.io/docs/upload-package#upload-via-cloudsmith-cli)**
+```
+cloudsmith push npm acme-corporation/acme-repo-one axios-0.30.4.tgz
+```
+
+My Cloudsmith policy will ```QUARANTINE``` the packaged based on the associated **[MAL-2026-2307](https://osv.dev/vulnerability/MAL-2026-2307)** ID and will tag it as ```MALWARE```:
+```
+cloudsmith list packages acme-corporation/acme-repo-one -k "$CLOUDSMITH_API_KEY" -q "format:npm AND tag:MALWARE"
+```
+
+Look-up the ```axios``` package in OSM and OSV data sources:
+```
+python3 checkmalware.py pkg npm axios
+```
+
+Understanding open-source malware:
+```
+./exploit-check.sh query MAL-2026-2307
+```
+
+### Cleanup
+```
+rm axios-0.30.4.tgz 
+rm axios-1.4.1.tgz 
+rm package.json
+```
