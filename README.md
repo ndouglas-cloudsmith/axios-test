@@ -118,3 +118,19 @@ Delete a policy:
 curl -X DELETE "https://api.cloudsmith.io/v2/workspaces/acme-corporation/policies/$SLUG_PERM/" \
   -H "X-Api-Key: $CLOUDSMITH_API_KEY"
 ```
+
+List of decision log ```keys```:
+```
+curl -X GET \
+  "https://api.cloudsmith.io/v2/workspaces/acme-corporation/policies/decision_logs/?policy=wrXYmBjB6sI0&page_size=1" \
+  -H "Accept: application/json" \
+  -H "X-Api-Key: $CLOUDSMITH_API_KEY" | jq '.results[0].policy_input.v0.vulnerabilities[0] | keys'
+```
+
+Filter for CVSS data (not happy):
+```
+curl -X GET \
+  "https://api.cloudsmith.io/v2/workspaces/acme-corporation/policies/decision_logs/?policy=wrXYmBjB6sI0&page_size=1" \
+  -H "Accept: application/json" \
+  -H "X-Api-Key: $CLOUDSMITH_API_KEY" | jq '.results[0].policy_input.v0.vulnerabilities[0]' 
+```
