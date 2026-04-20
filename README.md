@@ -58,3 +58,10 @@ https://www.aikido.dev/blog/axios-cve-2026-40175-a-critical-bug-thats-not-exploi
 ```
 ./exploit-check.sh query CVE-2026-40175
 ```
+
+## Flowise has a CVSS 10.0 RCE flaw now under active attack.
+Threat actors are actively exploiting a maximum-severity code injection vulnerability in the Flowise AI platform, which allows for remote code execution and full system compromise. The flaw resides in the ```CustomMCP``` node, where unvalidated JavaScript execution grants attackers access to sensitive ```Node.js``` modules, enabling them to exfiltrate data and execute arbitrary commands with only an API token. Despite a patch being available since version ```3.0.6```, over **12,000 internet-facing instances** remain exposed, making this a high-risk target for opportunistic attacks currently being observed in the wild.
+
+```
+./exploit-check.sh query CVE-2025-59528
+```
