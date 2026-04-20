@@ -79,6 +79,5 @@ cloudsmith push npm acme-corporation/acme-repo-one flowise-3.0.5.tgz
 Check the OPA **[Decision Logs](https://docs.cloudsmith.com/supply-chain-security/epm#decision-logs)**:
 ```
 curl -X GET "https://api.cloudsmith.io/v2/workspaces/acme-corporation/policies/" \
-  -H "X-Api-Key: $CLOUDSMITH_API_KEY" |
-  jq '.results[] | select(.name == "policy-perm")'
+  -H "X-Api-Key: $CLOUDSMITH_API_KEY" | jq
 ```
