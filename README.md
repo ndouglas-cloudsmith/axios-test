@@ -76,7 +76,8 @@ Push it to Cloudsmith:
 cloudsmith push npm acme-corporation/acme-repo-one flowise-3.0.5.tgz
 ```
 
-<img width="1015" height="903" alt="Screenshot 2026-04-20 at 13 46 34" src="https://github.com/user-attachments/assets/e0c9c886-0019-41b2-ad33-b8539b6d4318" />
+<img width="1182" height="903" alt="Screenshot 2026-04-20 at 13 51 30" src="https://github.com/user-attachments/assets/c8d84e60-c376-4f77-8592-084de67d96cb" />
+
 
 <br/><br/>
 Check the OPA **[Decision Logs](https://docs.cloudsmith.com/supply-chain-security/epm#decision-logs)**:
