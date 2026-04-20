@@ -78,7 +78,7 @@ cloudsmith push npm acme-corporation/acme-repo-one flowise-3.0.5.tgz
 
 <img width="1015" height="903" alt="Screenshot 2026-04-20 at 13 46 34" src="https://github.com/user-attachments/assets/e0c9c886-0019-41b2-ad33-b8539b6d4318" />
 
-
+<br/><br/>
 Check the OPA **[Decision Logs](https://docs.cloudsmith.com/supply-chain-security/epm#decision-logs)**:
 
 ```
@@ -106,26 +106,26 @@ List a specific policy by name:
 ```
 curl -X GET "https://api.cloudsmith.io/v2/workspaces/acme-corporation/policies/" \
   -H "X-Api-Key: $CLOUDSMITH_API_KEY" |
-  jq '.results[] | select(.name == "Blended CVSS & EPSS")'
+  jq '.results[] | select(.name == "CVSS & EPSS Blended")'
 ```
 
 List actions of a specific policy:
 ```
-curl -X GET "https://api.cloudsmith.io/v2/workspaces/acme-corporation/policies/wrXYmBjB6sI0/actions/" \
+curl -X GET "https://api.cloudsmith.io/v2/workspaces/acme-corporation/policies/5JQ48BtgX8wq/actions/" \
   -H "Accept: application/json" \
   -H "X-Api-Key: $CLOUDSMITH_API_KEY" | jq .
 ```
 
 Delete a policy:
 ```
-curl -X DELETE "https://api.cloudsmith.io/v2/workspaces/acme-corporation/policies/$SLUG_PERM/" \
+curl -X DELETE "https://api.cloudsmith.io/v2/workspaces/acme-corporation/policies/5JQ48BtgX8wq/" \
   -H "X-Api-Key: $CLOUDSMITH_API_KEY"
 ```
 
 List of decision log ```keys```:
 ```
 curl -X GET \
-  "https://api.cloudsmith.io/v2/workspaces/acme-corporation/policies/decision_logs/?policy=wrXYmBjB6sI0&page_size=1" \
+  "https://api.cloudsmith.io/v2/workspaces/acme-corporation/policies/decision_logs/?policy=5JQ48BtgX8wq&page_size=1" \
   -H "Accept: application/json" \
   -H "X-Api-Key: $CLOUDSMITH_API_KEY" | jq '.results[0].policy_input.v0.vulnerabilities[0] | keys'
 ```
@@ -133,7 +133,7 @@ curl -X GET \
 Filter for CVSS data (not happy):
 ```
 curl -X GET \
-  "https://api.cloudsmith.io/v2/workspaces/acme-corporation/policies/decision_logs/?policy=wrXYmBjB6sI0&page_size=1" \
+  "https://api.cloudsmith.io/v2/workspaces/acme-corporation/policies/decision_logs/?policy=5JQ48BtgX8wq&page_size=1" \
   -H "Accept: application/json" \
   -H "X-Api-Key: $CLOUDSMITH_API_KEY" | jq '.results[0].policy_input.v0.vulnerabilities[0]' 
 ```
@@ -141,7 +141,7 @@ curl -X GET \
 Filter for CVSS data (better - not great):
 ```
 curl -X GET \
-  "https://api.cloudsmith.io/v2/workspaces/acme-corporation/policies/decision_logs/?policy=wrXYmBjB6sI0&page_size=1" \
+  "https://api.cloudsmith.io/v2/workspaces/acme-corporation/policies/decision_logs/?policy=5JQ48BtgX8wq&page_size=1" \
   -H "Accept: application/json" \
   -H "X-Api-Key: $CLOUDSMITH_API_KEY" | jq '.results[0].policy_input.v0.osv[] | {id: .id, metadata: .database_specific}'
 ```
