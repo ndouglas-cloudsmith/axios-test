@@ -112,3 +112,9 @@ curl -X GET "https://api.cloudsmith.io/v2/workspaces/acme-corporation/policies/w
   -H "Accept: application/json" \
   -H "X-Api-Key: $CLOUDSMITH_API_KEY" | jq .
 ```
+
+Delete a policy:
+```
+curl -X DELETE "https://api.cloudsmith.io/v2/workspaces/acme-corporation/policies/$SLUG_PERM/" \
+  -H "X-Api-Key: $CLOUDSMITH_API_KEY"
+```
