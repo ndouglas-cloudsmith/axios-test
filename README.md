@@ -66,10 +66,19 @@ Threat actors are actively exploiting a maximum-severity code injection vulnerab
 ./exploit-check.sh query CVE-2025-59528
 ```
 
+Download the severly-vulnerable open-source dependency:
 ```
 npm pack flowise@3.0.5
 ```
 
+Push it to Cloudsmith:
 ```
 cloudsmith push npm acme-corporation/acme-repo-one flowise-3.0.5.tgz
+```
+
+Check the OPA **[Decision Logs](https://docs.cloudsmith.com/supply-chain-security/epm#decision-logs)**:
+```
+curl -X GET "https://api.cloudsmith.io/v2/workspaces/acme-corporation/policies/" \
+  -H "X-Api-Key: $CLOUDSMITH_API_KEY" |
+  jq '.results[] | select(.name == "policy-perm")'
 ```
