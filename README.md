@@ -65,3 +65,11 @@ Threat actors are actively exploiting a maximum-severity code injection vulnerab
 ```
 ./exploit-check.sh query CVE-2025-59528
 ```
+
+```
+npm pack flowise@3.0.5
+```
+
+```
+cloudsmith push npm acme-corporation/acme-repo-one flowise-3.0.5.tgz
+```
