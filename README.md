@@ -146,3 +146,14 @@ curl -X GET \
   -H "Accept: application/json" \
   -H "X-Api-Key: $CLOUDSMITH_API_KEY" | jq '.results[0].policy_input.v0.osv[] | {id: .id, metadata: .database_specific}'
 ```
+
+Filter for a specific CVE (```CVE-2025-59528```):
+```
+curl -s -X GET \
+  "https://api.cloudsmith.io/v2/workspaces/acme-corporation/policies/decision_logs/?policy=wrXYmBjB6sI0&page_size=100" \
+  -H "Accept: application/json" \
+  -H "X-Api-Key: $CLOUDSMITH_API_KEY" | \
+  jq '.results[] |
+      select(.policy_input.v0.vulnerabilities[].identifier == "CVE-2025-59528") |
+      del(.. | .details?, .description?)'
+```
