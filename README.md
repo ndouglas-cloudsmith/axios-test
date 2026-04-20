@@ -49,3 +49,12 @@ rm axios-0.30.4.tgz
 rm axios-1.4.1.tgz 
 rm package.json
 ```
+
+# Axios CVE-2026-40175
+**CRITICAL** vulnerability that’s… not exploitable
+<br/><br/>
+The CVSS score has since been adjusted to reflect the lack of exploitation potential: <br/>
+https://www.aikido.dev/blog/axios-cve-2026-40175-a-critical-bug-thats-not-exploitable
+```
+./exploit-check.sh query CVE-2026-40175
+```
