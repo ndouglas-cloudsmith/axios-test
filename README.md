@@ -77,7 +77,38 @@ cloudsmith push npm acme-corporation/acme-repo-one flowise-3.0.5.tgz
 ```
 
 Check the OPA **[Decision Logs](https://docs.cloudsmith.com/supply-chain-security/epm#decision-logs)**:
+
+```
+curl -X GET \
+  "https://api.cloudsmith.io/v2/workspaces/acme-corporation/policies/decision_logs/?policy=wrXYmBjB6sI0" \
+  -H "Accept: application/json" \
+  -H "X-Api-Key: $CLOUDSMITH_API_KEY" | jq .
+```
+
+Strictly this first ```30 lines```:
+```
+curl -X GET \
+  "https://api.cloudsmith.io/v2/workspaces/acme-corporation/policies/decision_logs/?policy=wrXYmBjB6sI0" \
+  -H "Accept: application/json" \
+  -H "X-Api-Key: $CLOUDSMITH_API_KEY" | jq . | head -n 30
+```
+
+List policies:
 ```
 curl -X GET "https://api.cloudsmith.io/v2/workspaces/acme-corporation/policies/" \
   -H "X-Api-Key: $CLOUDSMITH_API_KEY" | jq
+```
+
+List a specific policy by name:
+```
+curl -X GET "https://api.cloudsmith.io/v2/workspaces/acme-corporation/policies/" \
+  -H "X-Api-Key: $CLOUDSMITH_API_KEY" |
+  jq '.results[] | select(.name == "Blended CVSS & EPSS")'
+```
+
+List actions of a specific policy:
+```
+curl -X GET "https://api.cloudsmith.io/v2/workspaces/acme-corporation/policies/wrXYmBjB6sI0/actions/" \
+  -H "Accept: application/json" \
+  -H "X-Api-Key: $CLOUDSMITH_API_KEY" | jq .
 ```
